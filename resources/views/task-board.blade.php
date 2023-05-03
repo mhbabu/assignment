@@ -25,12 +25,12 @@
                   <div class="card">
                     <div class="card-header">
                       <div class="dropdown">
-                        <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
+                        <a  href="{{ route('task-categories.edit', $taskCategory->id) }}" class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
                           {{ $taskCategory->name }}
                         </a>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="{{ route('task-categories.edit', $taskCategory->id) }}"> Edit</a></li>
-                          <li><a class="dropdown-item" href="{{ url('task-categories/delete', $taskCategory->id) }}" onclick="return confirm(`Are you Sure`)">Delete</a></li>
+                          <li><a class="dropdown-item" href="{{ url('/auth-user/task-categories/delete/' . $taskCategory->id) }}" onclick="return confirm(`Are you Sure`)">Delete</a></li>
                         </ul>
                       </div>
                     </div>

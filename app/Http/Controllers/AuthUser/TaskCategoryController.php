@@ -15,7 +15,7 @@ class TaskCategoryController extends Controller
    public function store(Request $request){
     
     $request->validate([
-        'name' => ['required', 'string',  'unique:task_categories,name', 'max:255'],
+        'name' => 'required|string|unique:task_categories,name|max:255',
     ]);
 
     $taskCategory = new TaskCategory();
@@ -30,6 +30,18 @@ class TaskCategoryController extends Controller
 
     $data['taskCategory'] = $taskCategory;
     return view('task-category.edit', $data);
+   }
+
+   public function update(Request $request, TaskCategory $taskCategory){
+ 
+    $request->validate([
+        'name' => 'required|string|unique:task_categories,name,'.$taskCategory->id,
+    ]);
+
+    $taskCategory->update(['name' =>  $request->input('name')]);
+
+    return redirect(route('task-boards'))->with('flash_success', 'Task updated created successfully.');
+    
    }
 
    public function delete(TaskCategory $taskCategory)

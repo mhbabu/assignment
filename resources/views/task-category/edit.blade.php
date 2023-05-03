@@ -6,15 +6,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><i class="fa fa-edit"></i> Edit Category</div>
-                <form method="PUT" action="{{ route('task-categories.update', $taskCategory->id) }}">
-                <div class="card-body">
-                        @csrf
+                {!! Form::open(['route' => ['task-categories.update', $taskCategory->id], 'method' => 'PATCH']) !!}
+                    <div class="card-body">
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $taskCategory->name }}" required autofocus>
-
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +26,7 @@
                         <button type="submit" class="btn btn-primary float-end"> Update </button>
                         <div class="clearfix"></div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
