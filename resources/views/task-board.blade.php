@@ -34,24 +34,30 @@
                         </ul>
                       </div>
                     </div>
-                    <div class="card-body">
-                      <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                          <a class="text-black" style="text-decoration: none; cursor: pointer;">One</a>
-                          <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Edit</a></li>
-                            <li><a class="dropdown-item" href="#">Delete</a></li>
+
+                    @if(isset($taskCategory->tasks) && count($taskCategory->tasks) > 0)
+                      @foreach ($taskCategory->tasks as $task)
+                        <div class="card-body">
+                          <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              <a class="text-black" style="text-decoration: none; cursor: pointer;">One</a>
+                                @if(auth()->user()->id == $task->created_by)
+                                  <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;"></a>
+                                  <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('tasks.edit', $task->id) }}">Edit</a></li>
+                                      <li><a class="dropdown-item" href="{{ url('/auth-user/tasks/delete/' . $task->id) }}">Delete</a></li>
+                                  </ul>
+                                @endif
+                            </li>
                           </ul>
-                        </li>
-                      </ul>
-                    </div>
+                        </div>
+                      @endforeach
+                    @endif
                   </div>
                 </div>
               @endforeach
             @else
-              <h5 class="text-center">Empty</h5>  
+              <h5 class="text-center text-danger">No record found!</h5>  
             @endif  
           </div><!--row-->
       </div><!--card-body-->

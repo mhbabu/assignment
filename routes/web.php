@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthUser\TaskCategoryController;
 use App\Http\Controllers\AuthUser\TaskController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TaskBoardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'auth-user','middleware' => ['web','auth']], function() {
-    Route::get('task-boards', [HomeController::class, 'taskBoard'])->name('task-boards');
+    Route::get('task-boards', [TaskBoardController::class, 'taskBoard'])->name('task-boards');
     Route::get('task-categories/delete/{taskCategory}', [TaskCategoryController::class, 'delete']);
     Route::resource('task-categories', TaskCategoryController::class)->only(['create', 'store', 'edit', 'update']);
     Route::get('tasks/delete/{task}', [TaskController::class, 'delete']);

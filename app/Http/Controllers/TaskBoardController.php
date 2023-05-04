@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TaskCategory;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class TaskBoardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function taskBoard()
     {
-        $data['taskCategories'] = TaskCategory::all();
+        $data['taskCategories'] = TaskCategory::with('tasks')->where('created_by','=', auth()->user()->id)->get();
         return view('task-board', $data);
     }
 }
