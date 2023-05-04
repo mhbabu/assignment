@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><i class="fa fa-plus-circle"></i> Create Category</div>
+                <div class="card-header"><i class="fa fa-plus-circle"></i> Create Task</div>
                     {!! Form::open(['route' => 'tasks.store', 'method' => 'POST']) !!}
                         <div class="card-body">
                             <div class="row mb-3">

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><i class="fa fa-plus-circle"></i> Create Category</div>
+                <div class="card-header"><i class="fa fa-edit"></i> Update Category</div>
                     {!! Form::open(['route' => ['tasks.update', $task->id], 'method' => 'PATCH']) !!}
                         <div class="card-body">
                             <div class="row mb-3">
