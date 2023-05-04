@@ -13,7 +13,7 @@
             <h5>Task Board</h5>
               <div class="d-flex">
                  <a class="btn btn-sm btn-primary m-1" title="New Task Category" href="{{ route('task-categories.create') }}"><i class="fa fa-plus-circle"></i> Create Category</a>
-                 <a class="btn btn-sm btn-primary m-1" title="New Task" href=""><i class="fa fa-plus-circle"></i> Create Task</a>
+                 <a class="btn btn-sm btn-primary m-1" title="New Task" href="{{ route('tasks.create') }}"><i class="fa fa-plus-circle"></i> Create Task</a>
               </div><!--col-->
           </div>
       </div>
