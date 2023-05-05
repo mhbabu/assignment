@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\TaskCategoryController;
+use App\Http\Controllers\Api\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +22,9 @@ Route::prefix('auth-user')->group(function () {
 });
 
 Route::prefix('auth-user')->middleware('auth:sanctum')->group( function () {
+
     Route::post('logout', [AuthController::class, 'logout']);
-
     Route::resource('task-categories', TaskCategoryController::class);
-    // Route::get('tasks/delete/{task}', [TaskController::class, 'delete']);
-    // Route::resource('tasks', TaskController::class)->only(['create', 'store', 'edit', 'update']);
-
+    Route::resource('tasks', TaskController::class);
+    
 });

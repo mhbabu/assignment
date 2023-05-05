@@ -10,8 +10,8 @@ class TaskCategoryResource extends JsonResource
     {
         return [
             'id'   => $this->id,
-            'name' => $this->name
-            // 'comments'  => CommentResource::collection($this->comments), // assuming Post hasMany Comment
+            'name' => $this->name,
+            'task' => TaskResource::collection($this->tasks), // Each Categories - all tasks
         ];
     }
 }

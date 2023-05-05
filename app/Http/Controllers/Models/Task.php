@@ -12,6 +12,11 @@ class Task extends Model
     protected $table = 'tasks';
     protected $fillable = ['category_id', 'name', 'created_by', 'updated_by'];
 
+    public function category()
+    {
+        return $this->belongsTo(Task::class, 'category_id', 'id');
+    }
+
     public static function boot() {
         parent::boot();
         static::creating(function($user) {
