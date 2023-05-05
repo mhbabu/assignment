@@ -13,6 +13,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller{
 
+    public function userList(){
+
+        $users   = User::all();
+
+        if ($users->count() == 0) {
+            return response()->json(['data' => []], 404);
+        }
+        
+        $data = UserResource::collection($users);
+        return response(['data' => $data], Response::HTTP_OK);
+    }
+
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[

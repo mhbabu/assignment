@@ -22,7 +22,7 @@ Route::prefix('auth-user')->group(function () {
 });
 
 Route::prefix('auth-user')->middleware('auth:sanctum')->group( function () {
-
+    Route::get('list', [ AuthController::class, 'userList']);
     Route::post('logout', [AuthController::class, 'logout']);
     Route::resource('task-categories', TaskCategoryController::class);
     Route::resource('tasks', TaskController::class);
