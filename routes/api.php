@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TaskCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('auth-user')->controller(AuthController::class)->group(function () {
-    Route::post('register', 'register');
-    Route::post('login', 'login')->name('login');
+Route::prefix('auth-user')->group(function () {
+    Route::post('register', [ AuthController::class, 'register']);
+    Route::post('login', [ AuthController::class, 'login']);
 });
 
 Route::prefix('auth-user')->middleware('auth:sanctum')->group( function () {
     Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::resource('task-categories', TaskCategoryController::class);
+    // Route::get('tasks/delete/{task}', [TaskController::class, 'delete']);
+    // Route::resource('tasks', TaskController::class)->only(['create', 'store', 'edit', 'update']);
+
 });

@@ -15,7 +15,7 @@ class TaskCategoryController extends Controller
    public function store(Request $request){
     
     $request->validate([
-        'name' => 'required|string|unique:task_categories,name|max:255',
+        'name' => 'required|string|unique:task_categories,name|max:255'
     ]);
 
     $taskCategory = new TaskCategory();

@@ -6,32 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller{
-
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'message' => ['The provided credentials are incorrect.'],
-            ]);
-        }
-
-        $data['token'] = $user->createToken('auth_token')->plainTextToken;
-        $data['user']  =  new UserResource($user);
-        return response($data, Response::HTTP_OK);
-    }
 
     public function register(Request $request){
 
@@ -54,8 +34,37 @@ class AuthController extends Controller{
                 'password' => Hash::make($request->password)
             ]); 
 
-            $token = $user->createToken('auth_token')->plainTextToken;
-            return response()->json(['access_token' => $token, 'token_type' => 'Bearer']);    
+            $data['token'] = $user->createToken('auth_token')->plainTextToken;
+            $data['user']  =  new UserResource($user);
+            return response($data, Response::HTTP_OK);    
+        }
+    }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid Inputs',
+                'error' => $validator->errors()
+            ], 422);
+        }
+
+        if (Auth::attempt(['email'=> $request->email, 'password'=>$request->password])) {
+             $user = User::where('email', $request->email)->first();
+            $data['token'] = $user->createToken('auth_token')->plainTextToken;
+            $data['user']  =  new UserResource($user);
+            return response($data, Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Invalid Credentials',
+            ], 400);
         }
     }
 
