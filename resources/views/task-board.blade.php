@@ -25,29 +25,31 @@
                   <div class="card">
                     <div class="card-header">
                       <div class="dropdown">
-                        <a  href="{{ route('task-categories.edit', $taskCategory->id) }}" class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;">
+                        <li class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer; list-style: none">
                           {{ $taskCategory->name }}
-                        </a>
+                        </li>
                         <ul class="dropdown-menu">
                           <li><a class="dropdown-item" href="{{ route('task-categories.edit', $taskCategory->id) }}"> Edit</a></li>
-                          <li><a class="dropdown-item" href="{{ url('/auth-user/task-categories/delete/' . $taskCategory->id) }}" onclick="return confirm(`Are you Sure`)">Delete</a></li>
+                          @if($taskCategory->created_by == auth()->user()->id)
+                            <li><a class="dropdown-item" href="{{ url('/auth-user/task-categories/delete/' . $taskCategory->id) }}" onclick="return confirm(`Are you Sure`)">Delete</a></li>
+                           @endif
                         </ul>
                       </div>
                     </div>
 
                     @if(isset($taskCategory->tasks) && count($taskCategory->tasks) > 0)
                       @foreach ($taskCategory->tasks as $task)
-                        <div class="card-body">
+                        <div class="card-body m-0">
                           <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                              <a class="text-black" style="text-decoration: none; cursor: pointer;">One</a>
-                                @if(auth()->user()->id == $task->created_by)
-                                  <a class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;"></a>
+                              <a class="text-black" style="text-decoration: none; cursor: pointer;">{{ $task->name }}</a>
+                                  <div class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer;"></div>
                                   <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('tasks.edit', $task->id) }}">Edit</a></li>
-                                      <li><a class="dropdown-item" href="{{ url('/auth-user/tasks/delete/' . $task->id) }}">Delete</a></li>
+                                    @if(auth()->user()->id == $task->created_by)
+                                    <li><a class="dropdown-item" href="{{ url('/auth-user/tasks/delete/' . $task->id) }}" onclick="return confirm(`Are you Sure`)">Delete</a></li>
+                                    @endif
                                   </ul>
-                                @endif
                             </li>
                           </ul>
                         </div>

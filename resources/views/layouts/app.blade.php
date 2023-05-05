@@ -14,6 +14,27 @@
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col-md-10 ml-auto">
+                                <div class="dropdown">
+                                    <li class="dropdown-toggle text-black" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; cursor: pointer; list-style: none">
+                                     {{ auth()->user()->name }}
+                                    </li>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                               Logout
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                 </main>
             </div>

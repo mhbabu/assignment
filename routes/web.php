@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthUser\TaskCategoryController;
 use App\Http\Controllers\AuthUser\TaskController;
-use App\Http\Controllers\TaskBoardController;
+use App\Http\Controllers\AuthUser\TaskBoardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
