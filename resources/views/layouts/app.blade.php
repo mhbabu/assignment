@@ -30,6 +30,16 @@
                                                 </form>
                                             </a>
                                         </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ url('auth-user/list') }}">
+                                               User List
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('task-boards') }}">
+                                               Home
+                                            </a>
+                                        </li>
                                     </ul>
                                   </div>
                             </div>

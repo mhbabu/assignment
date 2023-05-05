@@ -26,6 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['prefix' => 'auth-user','middleware' => ['web','auth']], function() {
+    Route::get('list', [TaskBoardController::class, 'allUsers']);
     Route::get('task-boards', [TaskBoardController::class, 'taskBoard'])->name('task-boards');
     Route::get('task-categories/delete/{taskCategory}', [TaskCategoryController::class, 'delete']);
     Route::resource('task-categories', TaskCategoryController::class)->only(['create', 'store', 'edit', 'update']);

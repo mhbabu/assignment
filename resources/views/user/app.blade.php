@@ -1,26 +1,32 @@
+@extends('layouts.app')
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>@yield('title','Login Layout')</title>
-        {!! Html::style('assets/css/styles.css') !!}
-    </head>
-    <body class="bg-white">
-        <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
-                <main>
-                    @yield('content')
-                </main>
-            </div>
-
+@section('content')
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users $index => as $user)
+                        <tr>
+                            <th scope="row">{{ ++$index}}</th>
+                            <td>{{ $user->name}}</td>
+                            <td>{{ $user->email}}</td>
+                            <td>{{ $user->phone}}</td>
+                        </tr>
+                    @endforeach   
+                </tbody>
+              </table>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
-        {!! Html::script('assets/js/scripts.js') !!}
-    </body>
-</html>
+    </div>
+</div>
+@endsection
+
+
